@@ -8,10 +8,8 @@ import { axiosInstance } from '../../config/axios.config';
 import type { AxiosError, AxiosResponse } from 'axios';
 import {
   FIELDS_VALIDATION_MESSAGE,
-  MESSAGE,
   VALIDATION_ERROR,
 } from '../../Constants/errors.constants';
-import { SUCCESS_MESSAGES } from '../../Constants/success.constants';
 import { ROUTE } from '../../Constants/routes.constants';
 
 type FieldType = {
@@ -28,7 +26,11 @@ const Signup: React.FC = () => {
     mutateAsync: userLoginMutation,
     error,
     isPending: isLoading,
-  } = useMutation<AxiosResponse<LoginResponse>, AxiosError, SignupData>({
+  } = useMutation<
+    AxiosResponse<LoginResponse>,
+    AxiosError<AxiosError>,
+    SignupData
+  >({
     mutationFn: (data: SignupData) =>
       axiosInstance.post(apipaths.auth.signup(), data),
     onSuccess: (data) => {
@@ -36,28 +38,23 @@ const Signup: React.FC = () => {
         console.error('Something went wrong');
         return;
       }
-      api.success({
-        message: SUCCESS_MESSAGES.SIGNUP,
+      navigate(ROUTE.LOGIN);
+    },
+    onError: (error) => {
+      api.error({
+        message: VALIDATION_ERROR,
+        description: error.response?.data.message,
         placement: 'topRight',
       });
-      navigate(ROUTE.LOGIN);
     },
   });
 
-  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    try {
-      await userLoginMutation({
-        username: values.username,
-        password: values.password,
-        email: values.email,
-      });
-    } catch {
-      api.error({
-        message: VALIDATION_ERROR,
-        description: MESSAGE,
-        placement: 'topRight',
-      });
-    }
+  const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+    userLoginMutation({
+      username: values.username,
+      password: values.password,
+      email: values.email,
+    });
   };
 
   return (
