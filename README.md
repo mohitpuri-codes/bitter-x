@@ -21,7 +21,7 @@ Bitter is a modern social media application built using Vite, React, and TypeScr
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/mohitpuri-codes/bitter.git
+git clone https://github.com/mohitpuri-codes/bitter-x.git
 cd bitter
 ```
 
