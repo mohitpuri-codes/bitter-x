@@ -1,6 +1,6 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
-import Router from "./Routes/router";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Router from './Routes/router';
 
 function App() {
   const queryClient = new QueryClient();
