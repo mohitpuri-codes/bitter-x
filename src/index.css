@@ -11,3 +11,63 @@
 main {
   flex: 1;
 }
+
+/* Login.css */
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 1rem;
+  background-color: #fff;
+}
+
+.login-container img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.bitter-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.bitter-logo p {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.login-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.submit-button {
+  width: 100%;
+
+  max-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .login-form {
+    padding: 1.5rem;
+  }
+
+  .submit-button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 1rem;
+  }
+}
