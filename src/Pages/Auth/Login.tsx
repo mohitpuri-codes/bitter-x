@@ -9,6 +9,7 @@ import { axiosInstance } from '../../config/axios.config';
 import { TOKEN } from '../../Constants/globals.constants';
 import type { AxiosError, AxiosResponse } from 'axios';
 import { ROUTE } from '../../Constants/routes.constants';
+import { FIELDS_VALIDATION_MESSAGE } from '../../Constants/errors.constants';
 
 type FieldType = {
   username: string;
@@ -75,10 +76,13 @@ const Login: React.FC = () => {
             label="Username"
             name="username"
             rules={[
-              { required: true, message: 'Please input your username!' },
+              {
+                required: true,
+                message: FIELDS_VALIDATION_MESSAGE.NO_USERNAME,
+              },
               {
                 min: 1,
-                message: 'Username must be atleast one character long',
+                message: FIELDS_VALIDATION_MESSAGE.VALID_USERNAME,
               },
             ]}
           >
@@ -89,8 +93,14 @@ const Login: React.FC = () => {
             label="Password"
             name="password"
             rules={[
-              { required: true, message: 'Please input your password!' },
-              { min: 6, message: 'Password must be atleast 6 character long' },
+              {
+                required: true,
+                message: FIELDS_VALIDATION_MESSAGE.NO_PASSWORD,
+              },
+              {
+                min: 6,
+                message: FIELDS_VALIDATION_MESSAGE.VALID_PASSWORD,
+              },
             ]}
           >
             <Input.Password />
