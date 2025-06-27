@@ -8,6 +8,7 @@ import { apipaths } from '../../config/apiPaths';
 import { axiosInstance } from '../../config/axios.config';
 import { TOKEN } from '../../Constants/globals.constants';
 import type { AxiosError, AxiosResponse } from 'axios';
+import { ROUTE } from '../../Constants/routes.constants';
 
 type FieldType = {
   username: string;
@@ -36,7 +37,7 @@ const Login: React.FC = () => {
 
       const token = data.data.data.accessToken;
       localStorage.setItem(TOKEN, token);
-      navigate('/');
+      navigate(ROUTE.HOME);
     },
   });
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
@@ -94,7 +95,7 @@ const Login: React.FC = () => {
       </Form>
       <div style={{ textAlign: 'center', marginTop: '1rem' }}>
         <span>Create an account? </span>
-        <Link to="/signup">Signup</Link>
+        <Link to={ROUTE.SIGNUP}>Signup</Link>
       </div>
     </div>
   );

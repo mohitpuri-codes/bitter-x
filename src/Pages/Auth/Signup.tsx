@@ -1,12 +1,18 @@
-import React from 'react';
 import type { FormProps } from 'antd';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, notification } from 'antd';
 import { Link, useNavigate } from 'react-router';
 import type { LoginResponse, SignupData } from '../../types/AuthTypes';
 import { useMutation } from '@tanstack/react-query';
 import { apipaths } from '../../config/apiPaths';
 import { axiosInstance } from '../../config/axios.config';
 import type { AxiosError, AxiosResponse } from 'axios';
+import {
+  FIELDS_VALIDATION_MESSAGE,
+  MESSAGE,
+  VALIDATION_ERROR,
+} from '../../Constants/errors.constants';
+import { SUCCESS_MESSAGES } from '../../Constants/success.constants';
+import { ROUTE } from '../../Constants/routes.constants';
 
 type FieldType = {
   email: string;
@@ -14,12 +20,9 @@ type FieldType = {
   password: string;
 };
 
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
-
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
   const navigate = useNavigate();
+  const [api, contextHolder] = notification.useNotification();
 
   const {
     mutateAsync: userLoginMutation,
@@ -33,83 +36,107 @@ const Login: React.FC = () => {
         console.error('Something went wrong');
         return;
       }
-
-      navigate('/login');
+      api.success({
+        message: SUCCESS_MESSAGES.SIGNUP,
+        placement: 'topRight',
+      });
+      navigate(ROUTE.LOGIN);
     },
   });
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    console.log('Success:', values);
-    await userLoginMutation({
-      username: values.username,
-      password: values.password,
-      email: values.email,
-    });
+    try {
+      await userLoginMutation({
+        username: values.username,
+        password: values.password,
+        email: values.email,
+      });
+    } catch {
+      api.error({
+        message: VALIDATION_ERROR,
+        description: MESSAGE,
+        placement: 'topRight',
+      });
+    }
   };
 
   return (
-    <div className="login-container">
-      <div className="bitter-logo">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3qYraKRBr6_XBl8XOkTQRv3EgvcaAwBYjWA&s"
-          alt="logo"
-        />
-        <p>Bitter</p>
+    <>
+      {contextHolder}
+      <div className="login-container">
+        <div className="bitter-logo">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3qYraKRBr6_XBl8XOkTQRv3EgvcaAwBYjWA&s"
+            alt="logo"
+          />
+          <p>Bitter</p>
+        </div>
+        <Form
+          className="login-form"
+          name="basic"
+          layout="vertical"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          autoComplete="off"
+        >
+          <Form.Item<FieldType>
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: FIELDS_VALIDATION_MESSAGE.NO_EMAIL },
+              { type: 'email', message: FIELDS_VALIDATION_MESSAGE.VALID_EMAIL },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item<FieldType>
+            label="Username"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: FIELDS_VALIDATION_MESSAGE.NO_USERNAME,
+              },
+              {
+                min: 1,
+                message: FIELDS_VALIDATION_MESSAGE.VALID_USERNAME,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: FIELDS_VALIDATION_MESSAGE.NO_PASSWORD,
+              },
+              {
+                min: 6,
+                message: FIELDS_VALIDATION_MESSAGE.VALID_PASSWORD,
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item label={null}>
+            <Button type="primary" htmlType="submit" disabled={isLoading} block>
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+
+        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+          <span>Already have an account? </span>
+          <Link to={ROUTE.LOGIN}>Login</Link>
+        </div>
       </div>
-      <Form
-        className="login-form"
-        name="basic"
-        layout="vertical"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item<FieldType>
-          label="Email"
-          name="email"
-          rules={[
-            { required: true, message: 'Please input your email!' },
-            { type: 'email', message: 'Please enter a valid email' },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item<FieldType>
-          label="Username"
-          name="username"
-          rules={[
-            { required: true, message: 'Please input your username!' },
-            { min: 1, message: 'Username must be at least one character long' },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item<FieldType>
-          label="Password"
-          name="password"
-          rules={[
-            { required: true, message: 'Please input your password!' },
-            { min: 6, message: 'Password must be at least 6 characters long' },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item label={null}>
-          <Button type="primary" htmlType="submit" disabled={isLoading} block>
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-
-      <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-        <span>Already have an account? </span>
-        <Link to="/login">Login</Link>
-      </div>
-    </div>
+    </>
   );
 };
 
-export default Login;
+export default Signup;
