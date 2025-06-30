@@ -14,6 +14,7 @@ import {
   type CreateAuthFormType,
 } from '../../types/FormFields';
 import { createAuthFormRules } from '../../Constants/rules.constants';
+import styles from './auth.module.css';
 
 type FieldType = {
   username: string;
@@ -34,8 +35,7 @@ const Login = () => {
     AxiosError<AxiosError>,
     LoginData
   >({
-    mutationFn: (data: LoginData) =>
-      axiosInstance.post(apipaths.auth.login(), data),
+    mutationFn: (data) => axiosInstance.post(apipaths.auth.login(), data),
     onSuccess: (data) => {
       if (!data || !data.data.success || error) {
         console.error('Something went wrong');
@@ -61,8 +61,8 @@ const Login = () => {
   return (
     <>
       {contextHolder}
-      <div className="login-container">
-        <div className="bitter-logo">
+      <div className={styles.formContainer}>
+        <div className={styles.bitterLogo}>
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3qYraKRBr6_XBl8XOkTQRv3EgvcaAwBYjWA&s"
             alt="logo"
@@ -74,19 +74,19 @@ const Login = () => {
           layout="vertical"
           onFinish={onFinish}
           form={form}
-          className="login-form"
+          className={styles.form}
         >
-          <Form.Item<FieldType>
+          <Form.Item
             label="Username"
-            name="username"
+            name={CreateAuthForm.Username}
             rules={createAuthFormRules[CreateAuthForm.Username]}
           >
             <Input />
           </Form.Item>
 
-          <Form.Item<FieldType>
+          <Form.Item
             label="Password"
-            name="password"
+            name={CreateAuthForm.Password}
             rules={createAuthFormRules[CreateAuthForm.Password]}
           >
             <Input.Password />
@@ -96,7 +96,7 @@ const Login = () => {
             Submit
           </Button>
         </Form>
-        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+        <div className={styles.navigator}>
           <span>Create an account? </span>
           <Link to={ROUTE.SIGNUP}>Signup</Link>
         </div>

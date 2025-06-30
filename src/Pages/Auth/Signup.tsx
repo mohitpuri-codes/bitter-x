@@ -14,6 +14,7 @@ import {
   type CreateAuthFormType,
 } from '../../types/FormFields';
 import { createAuthFormRules } from '../../Constants/rules.constants';
+import styles from './auth.module.css';
 
 type FieldType = {
   email: string;
@@ -35,8 +36,7 @@ const Signup = () => {
     AxiosError<AxiosError>,
     SignupData
   >({
-    mutationFn: (data: SignupData) =>
-      axiosInstance.post(apipaths.auth.signup(), data),
+    mutationFn: (data) => axiosInstance.post(apipaths.auth.signup(), data),
     onSuccess: (data) => {
       if (!data || !data.data.success || error) {
         console.error('Something went wrong');
@@ -64,8 +64,8 @@ const Signup = () => {
   return (
     <>
       {contextHolder}
-      <div className="login-container">
-        <div className="bitter-logo">
+      <div className={styles.formContainer}>
+        <div className={styles.bitterLogo}>
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3qYraKRBr6_XBl8XOkTQRv3EgvcaAwBYjWA&s"
             alt="logo"
@@ -73,7 +73,7 @@ const Signup = () => {
           <p>Bitter</p>
         </div>
         <Form
-          className="login-form"
+          className={styles.form}
           name="basic"
           layout="vertical"
           onFinish={onFinish}
@@ -107,7 +107,7 @@ const Signup = () => {
           </Button>
         </Form>
 
-        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+        <div className={styles.navigator}>
           <span>Already have an account? </span>
           <Link to={ROUTE.LOGIN}>Login</Link>
         </div>
