@@ -1,0 +1,63 @@
+/* Login.css */
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 1rem;
+  background-color: #fff;
+}
+
+.formContainer img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.bitterLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.bitterLogo p {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.submit-button {
+  width: 100%;
+  max-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .form {
+    padding: 1.5rem;
+  }
+
+  .submit-button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 1rem;
+  }
+}
+
+.navigator {
+  text-align: center;
+  margin-top: 1rem;
+}

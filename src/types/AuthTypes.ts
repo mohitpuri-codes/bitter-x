@@ -28,3 +28,11 @@ export interface LoginResponse {
   message: string;
   success: boolean;
 }
+
+// singup
+
+export interface SignupData {
+  email: string;
+  username: string;
+  password: string;
+}
