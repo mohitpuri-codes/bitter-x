@@ -1,4 +1,3 @@
-import React from 'react';
 import type { FormProps } from 'antd';
 import { Button, Form, Input, notification } from 'antd';
 import { Link, useNavigate } from 'react-router';
@@ -9,14 +8,20 @@ import { axiosInstance } from '../../config/axios.config';
 import { TOKEN } from '../../Constants/globals.constants';
 import type { AxiosError, AxiosResponse } from 'axios';
 import { ROUTE } from '../../Constants/routes.constants';
-import { FIELDS_VALIDATION_MESSAGE } from '../../Constants/errors.constants';
+import { useForm } from 'antd/es/form/Form';
+import {
+  CreateAuthForm,
+  type CreateAuthFormType,
+} from '../../types/FormFields';
+import { createAuthFormRules } from '../../Constants/rules.constants';
 
 type FieldType = {
   username: string;
   password: string;
 };
 
-const Login: React.FC = () => {
+const Login = () => {
+  const [form] = useForm<CreateAuthFormType>();
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
 
@@ -67,24 +72,14 @@ const Login: React.FC = () => {
         <Form
           name="basic"
           layout="vertical"
-          initialValues={{ remember: true }}
           onFinish={onFinish}
-          autoComplete="off"
+          form={form}
           className="login-form"
         >
           <Form.Item<FieldType>
             label="Username"
             name="username"
-            rules={[
-              {
-                required: true,
-                message: FIELDS_VALIDATION_MESSAGE.NO_USERNAME,
-              },
-              {
-                min: 1,
-                message: FIELDS_VALIDATION_MESSAGE.VALID_USERNAME,
-              },
-            ]}
+            rules={createAuthFormRules[CreateAuthForm.Username]}
           >
             <Input />
           </Form.Item>
@@ -92,25 +87,14 @@ const Login: React.FC = () => {
           <Form.Item<FieldType>
             label="Password"
             name="password"
-            rules={[
-              {
-                required: true,
-                message: FIELDS_VALIDATION_MESSAGE.NO_PASSWORD,
-              },
-              {
-                min: 6,
-                message: FIELDS_VALIDATION_MESSAGE.VALID_PASSWORD,
-              },
-            ]}
+            rules={createAuthFormRules[CreateAuthForm.Password]}
           >
             <Input.Password />
           </Form.Item>
 
-          <Form.Item label={null}>
-            <Button type="primary" htmlType="submit" disabled={isLoading} block>
-              Submit
-            </Button>
-          </Form.Item>
+          <Button type="primary" htmlType="submit" disabled={isLoading} block>
+            Submit
+          </Button>
         </Form>
         <div style={{ textAlign: 'center', marginTop: '1rem' }}>
           <span>Create an account? </span>
