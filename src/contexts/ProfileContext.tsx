@@ -11,7 +11,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     queryFn: () => axiosInstance.get(apipaths.user.profile()),
   });
 
-  const isAuthenticated = !data && !isError;
+  const isAuthenticated = !!data && !isError;
 
   return (
     <ProfileContext.Provider

@@ -6,8 +6,8 @@ import Spin from 'antd/es/spin';
 import { LoadingOutlined } from '@ant-design/icons';
 import Flex from 'antd/es/flex';
 
+const useProfile = () => useContext(ProfileContext);
 function PrivateRouter({ children }: { children: ReactNode }) {
-  const useProfile = () => useContext(ProfileContext);
   const { isAuthenticated, isLoading } = useProfile();
 
   if (isLoading)

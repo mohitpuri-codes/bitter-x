@@ -2,10 +2,9 @@ import type { FormProps } from 'antd';
 import { Button, Form, Input, notification } from 'antd';
 import { Link, useNavigate } from 'react-router';
 import type { LoginData, LoginResponse } from '../../types/AuthTypes';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apipaths } from '../../config/apiPaths';
 import { axiosInstance } from '../../config/axios.config';
-import { TOKEN } from '../../Constants/globals.constants';
 import type { AxiosError, AxiosResponse } from 'axios';
 import { ROUTE } from '../../Constants/routes.constants';
 import { useForm } from 'antd/es/form/Form';
@@ -25,6 +24,7 @@ const Login = () => {
   const [form] = useForm<CreateAuthFormType>();
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
+  const queryClient = useQueryClient();
 
   const {
     mutateAsync: userLoginMutation,
@@ -36,13 +36,15 @@ const Login = () => {
     LoginData
   >({
     mutationFn: (data) => axiosInstance.post(apipaths.auth.login(), data),
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       if (!data || !data.data.success || error) {
         console.error('Something went wrong');
         return;
       }
-      const token = data.data.data.accessToken;
-      localStorage.setItem(TOKEN, token);
+      queryClient.setQueryData(['profile'], {
+        data: data.data.data,
+      });
+
       navigate(ROUTE.HOME);
     },
     onError: (error) => {
