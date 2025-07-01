@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 import type { LoginResponse } from '../types/AuthTypes';
 
 type ProfileContextType = {
@@ -12,3 +12,5 @@ export const ProfileContext = createContext<ProfileContextType>({
   isLoading: true,
   isAuthenticated: false,
 });
+
+export const useProfile = () => useContext(ProfileContext);

@@ -14,6 +14,7 @@ import {
 } from '../../types/FormFields';
 import { createAuthFormRules } from '../../Constants/rules.constants';
 import styles from './auth.module.css';
+import { QueryKey } from '../../Constants/queryKeys.constants';
 
 type FieldType = {
   username: string;
@@ -41,7 +42,7 @@ const Login = () => {
         console.error('Something went wrong');
         return;
       }
-      queryClient.setQueryData(['profile'], {
+      queryClient.setQueryData([QueryKey.profile], {
         data: data.data.data,
       });
 
