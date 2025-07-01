@@ -42,9 +42,7 @@ const Login = () => {
         console.error('Something went wrong');
         return;
       }
-      queryClient.setQueryData([QueryKey.profile], {
-        data: data.data.data,
-      });
+      queryClient.invalidateQueries({ queryKey: [QueryKey.profile] });
 
       navigate(ROUTE.HOME);
     },
