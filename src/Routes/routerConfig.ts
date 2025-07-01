@@ -1,12 +1,12 @@
-import HomeLayout from "../Layout/HomeLayout";
-import Bookmarks from "../Pages/UserPages/Bookmarks";
-import Explore from "../Pages/UI/Explore";
-import Home from "../Pages/UI/Home";
-import Login from "../Pages/Auth/Login";
-import NotFound from "../Pages/NotFound";
-import Profile from "../Pages/UserPages/Profile";
-import Tweet from "../Pages/ActionPages/Tweet";
-import Signup from "../Pages/Auth/Signup";
+import HomeLayout from '../Layout/HomeLayout';
+import Bookmarks from '../Pages/UserPages/Bookmarks';
+import Explore from '../Pages/UI/Explore';
+import Home from '../Pages/UI/Home';
+import Login from '../Pages/Auth/Login';
+import NotFound from '../Pages/NotFound';
+import Profile from '../Pages/UserPages/Profile';
+import Tweet from '../Pages/ActionPages/Tweet';
+import Signup from '../Pages/Auth/Signup';
 
 export interface RouteConfig {
   path?: string;
@@ -18,47 +18,47 @@ export interface RouteConfig {
 
 export const routes: RouteConfig[] = [
   {
-    path: "/",
+    path: '/',
     element: HomeLayout,
     children: [
       {
         index: true,
-        path: "",
+        path: '',
         element: Home,
         isAuth: true,
       },
       {
-        path: "explore",
+        path: 'explore',
         element: Explore,
         isAuth: true,
       },
       {
-        path: "bookmarks",
+        path: 'bookmarks',
         element: Bookmarks,
         isAuth: true,
       },
       {
-        path: "profile",
+        path: 'profile',
         element: Profile,
         isAuth: true,
       },
       {
-        path: "tweet",
+        path: 'tweet',
         element: Tweet,
         isAuth: true,
       },
     ],
   },
   {
-    path: "login",
+    path: 'login',
     element: Login,
   },
   {
-    path: "signup",
+    path: 'signup',
     element: Signup,
   },
   {
-    path: "*",
+    path: '*',
     element: NotFound,
   },
 ];

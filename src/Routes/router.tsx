@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router";
-import { routes, type RouteConfig } from "./routerConfig";
-import PrivateRouter from "./PrivateRouter";
+import { Route, Routes } from 'react-router';
+import { routes, type RouteConfig } from './routerConfig';
+import PrivateRouter from './PrivateRouter';
 
 const Router = () => {
   return <Routes>{getRoutesComponent(routes)}</Routes>;
