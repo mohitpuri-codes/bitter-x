@@ -15,6 +15,7 @@ import {
 import { createAuthFormRules } from '../../Constants/rules.constants';
 import styles from './auth.module.css';
 import { QueryKey } from '../../Constants/queryKeys.constants';
+import { TOKEN } from '../../Constants/globals.constants';
 
 type FieldType = {
   username: string;
@@ -42,7 +43,12 @@ const Login = () => {
         console.error('Something went wrong');
         return;
       }
+      const token = data.data.data.accessToken;
+      localStorage.setItem(TOKEN, token);
       queryClient.invalidateQueries({ queryKey: [QueryKey.profile] });
+      // queryClient.setQueryData([QueryKey.profile], {
+      //   data: data.data.data,
+      // });
 
       navigate(ROUTE.HOME);
     },
