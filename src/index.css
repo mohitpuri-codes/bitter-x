@@ -11,3 +11,7 @@
 main {
   flex: 1;
 }
+
+.loader {
+  font-size: 48px;
+}

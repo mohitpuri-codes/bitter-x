@@ -6,4 +6,7 @@ export const apipaths = {
     login: () => `users/login`,
     signup: () => `users/register`,
   },
+  user: {
+    profile: () => 'social-media/profile',
+  },
 };

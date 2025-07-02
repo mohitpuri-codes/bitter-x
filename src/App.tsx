@@ -3,6 +3,7 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Router from './Routes/router';
 import { useMemo } from 'react';
 import { Context } from './contexts/notification.context';
+import { ProfileProvider } from './contexts/ProfileContext';
 
 function App() {
   const queryClient = new QueryClient();
@@ -11,11 +12,13 @@ function App() {
   return (
     <>
       <ErrorBoundary>
-        <Context.Provider value={contextValue}>
-          <QueryClientProvider client={queryClient}>
-            <Router />
-          </QueryClientProvider>
-        </Context.Provider>
+        <QueryClientProvider client={queryClient}>
+          <ProfileProvider>
+            <Context.Provider value={contextValue}>
+              <Router />
+            </Context.Provider>
+          </ProfileProvider>
+        </QueryClientProvider>
       </ErrorBoundary>
     </>
   );
