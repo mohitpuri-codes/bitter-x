@@ -46,9 +46,6 @@ const Login = () => {
       const token = data.data.data.accessToken;
       localStorage.setItem(TOKEN, token);
       queryClient.invalidateQueries({ queryKey: [QueryKey.profile] });
-      // queryClient.setQueryData([QueryKey.profile], {
-      //   data: data.data.data,
-      // });
 
       navigate(ROUTE.HOME);
     },
