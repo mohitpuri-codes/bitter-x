@@ -148,6 +148,7 @@ export default function Tweet() {
             rules={createPostFormRules[CreatePostForm.content]}
           >
             <TextArea
+              showCount
               className={styles.textArea}
               placeholder="What’s Happening?"
             />
