@@ -1,5 +1,7 @@
-import type { FormProps } from 'antd';
-import { Button, Form, Input, notification } from 'antd';
+import Button from 'antd/es/button';
+import Form from 'antd/es/form';
+import Input from 'antd/es/input';
+import notification from 'antd/es/notification';
 import { Link, useNavigate } from 'react-router';
 import type { LoginData, LoginResponse } from '../../types/AuthTypes';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -7,7 +9,7 @@ import { apipaths } from '../../config/apiPaths';
 import { axiosInstance } from '../../config/axios.config';
 import type { AxiosError, AxiosResponse } from 'axios';
 import { ROUTE } from '../../Constants/routes.constants';
-import { useForm } from 'antd/es/form/Form';
+import { useForm, type FormProps } from 'antd/es/form/Form';
 import {
   CreateAuthForm,
   type CreateAuthFormType,

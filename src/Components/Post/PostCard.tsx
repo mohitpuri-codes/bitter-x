@@ -13,7 +13,7 @@ interface PostListProps {
   postItem: PostData;
 }
 
-export default function PostList({ postItem }: PostListProps) {
+export default function PostCard({ postItem }: PostListProps) {
   return (
     <Card key={postItem._id} className={styles.postCard}>
       <Row align="top" gutter={[12, 0]}>

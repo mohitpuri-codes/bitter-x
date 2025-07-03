@@ -1,6 +1,6 @@
 import type { PostData } from '../../types/PostTypes';
-import { Typography } from 'antd';
 import styles from '../../Pages/UI/home.module.css';
+import Typography from 'antd/es/typography';
 
 const { Text } = Typography;
 

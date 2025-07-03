@@ -4,11 +4,11 @@ import { apipaths } from '../../config/apiPaths';
 import Loader from '../../Components/Loader/Loader';
 import type { AxiosResponse } from 'axios';
 import type { GetAllPosts } from '../../types/PostTypes';
-import { Empty } from 'antd';
 import Fallback from '../../Components/Fallback /Fallback';
 import styles from './home.module.css';
 import { QueryKey } from '../../Constants/queryKeys.constants';
-import PostList from '../../Components/Post/PostList';
+import PostCard from '../../Components/Post/PostCard';
+import Empty from 'antd/es/empty';
 
 export default function Home() {
   const { data, isLoading, isError } = useQuery<AxiosResponse<GetAllPosts>>({
@@ -26,14 +26,13 @@ export default function Home() {
 
   const posts = data?.data?.data?.posts;
   const totalPostsLength = posts?.length;
-  console.log(data);
 
   return (
     <>
       {(totalPostsLength ?? 0) > 0 ? (
         <div className={styles.feedContainer}>
           {posts?.map((postItem) => (
-            <PostList postItem={postItem} />
+            <PostCard key={postItem._id} postItem={postItem} />
           ))}
         </div>
       ) : (

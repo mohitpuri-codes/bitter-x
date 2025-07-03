@@ -1,4 +1,6 @@
-import { Layout, Menu, Button } from 'antd';
+import Menu from 'antd/es/menu';
+import Button from 'antd/es/button';
+import Sider from 'antd/es/layout/Sider';
 import {
   HomeOutlined,
   CompassOutlined,
@@ -8,8 +10,6 @@ import {
 import { Link, useLocation } from 'react-router';
 import styles from './sidebar.module.css';
 import { ROUTE } from '../../Constants/routes.constants';
-
-const { Sider } = Layout;
 
 export default function Sidebar() {
   const location = useLocation();
