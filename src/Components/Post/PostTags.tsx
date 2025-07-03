@@ -9,13 +9,15 @@ interface PostTagsProps {
 }
 
 export default function PostTags({ postItem }: PostTagsProps) {
+  console.log(postItem.tags);
+
   return (
     <>
       {postItem.tags.length > 0 && (
         <div className={styles.tags}>
           {postItem.tags.map((tagItem) => (
             <Text key={tagItem} type="secondary" className={styles.tag}>
-              #{tagItem}
+              {`#${tagItem}`}
             </Text>
           ))}
         </div>

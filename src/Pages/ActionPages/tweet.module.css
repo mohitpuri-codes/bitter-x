@@ -1,0 +1,46 @@
+.formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 24px;
+}
+
+.bitterLogo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.bitterLogo img {
+  width: 60px;
+  height: auto;
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.textArea {
+  height: 120px;
+}
+
+.tags {
+  max-height: 70px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+  padding-right: 8px;
+}
+
+.tagItem {
+  display: flex;
+  margin-bottom: 8px;
+}
