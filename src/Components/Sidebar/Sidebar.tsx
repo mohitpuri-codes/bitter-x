@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router';
 import styles from './sidebar.module.css';
+import { ROUTE } from '../../Constants/routes.constants';
 
 const { Sider } = Layout;
 
@@ -25,34 +26,38 @@ export default function Sidebar() {
         selectedKeys={[location.pathname]}
         className={styles.menu}
       >
-        <Menu.Item key="/" icon={<HomeOutlined />} className={styles.menuItem}>
-          <Link to="/">Home</Link>
+        <Menu.Item
+          key={ROUTE.HOME}
+          icon={<HomeOutlined />}
+          className={styles.menuItem}
+        >
+          <Link to={ROUTE.HOME}>Home</Link>
         </Menu.Item>
         <Menu.Item
-          key="/explore"
+          key={ROUTE.EXPLORE}
           icon={<CompassOutlined />}
           className={styles.menuItem}
         >
-          <Link to="/explore">Explore</Link>
+          <Link to={ROUTE.EXPLORE}>Explore</Link>
         </Menu.Item>
         <Menu.Item
-          key="/bookmarks"
+          key={ROUTE.BOOKMARKS}
           icon={<BookOutlined />}
           className={styles.menuItem}
         >
-          <Link to="/bookmarks">Bookmarks</Link>
+          <Link to={ROUTE.BOOKMARKS}>Bookmarks</Link>
         </Menu.Item>
         <Menu.Item
-          key="/profile"
+          key={ROUTE.PROFILE}
           icon={<UserOutlined />}
           className={styles.menuItem}
         >
-          <Link to="/profile">Profile</Link>
+          <Link to={ROUTE.PROFILE}>Profile</Link>
         </Menu.Item>
       </Menu>
 
       <div className={styles.tweetButtonWrapper}>
-        <Link to="/tweet">
+        <Link to={ROUTE.TWEET}>
           <Button type="primary" block className={styles.tweetButton}>
             Tweet
           </Button>
