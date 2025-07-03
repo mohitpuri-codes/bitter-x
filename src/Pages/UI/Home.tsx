@@ -9,9 +9,12 @@ import styles from './home.module.css';
 import { QueryKey } from '../../Constants/queryKeys.constants';
 import PostCard from '../../Components/Post/PostCard';
 import Empty from 'antd/es/empty';
+import type { APIResponse } from '../../types/AuthTypes';
 
 export default function Home() {
-  const { data, isLoading, isError } = useQuery<AxiosResponse<GetAllPosts>>({
+  const { data, isLoading, isError } = useQuery<
+    AxiosResponse<APIResponse<GetAllPosts>>
+  >({
     queryKey: [QueryKey.allPosts],
     queryFn: () => axiosInstance.get(apipaths.posts.getAllPosts()),
   });

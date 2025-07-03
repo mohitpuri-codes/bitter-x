@@ -19,6 +19,7 @@ import styles from '../ActionPages/tweet.module.css';
 import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
+import type { APIResponse } from '../../types/AuthTypes';
 
 // Extract the file type - From antD
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
@@ -86,7 +87,7 @@ export default function Tweet() {
 
   const { mutateAsync: postCreationMutation, isPending: isLoading } =
     useMutation<
-      AxiosResponse<PostResponseSchema>,
+      AxiosResponse<APIResponse<PostResponseSchema>>,
       AxiosError<AxiosError>,
       FieldType
     >({

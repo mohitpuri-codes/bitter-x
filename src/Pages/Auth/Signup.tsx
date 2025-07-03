@@ -4,7 +4,11 @@ import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import notification from 'antd/es/notification';
 import { Link, useNavigate } from 'react-router';
-import type { LoginResponse, SignupData } from '../../types/AuthTypes';
+import type {
+  APIResponse,
+  LoggedinUserReponse,
+  SignupData,
+} from '../../types/AuthTypes';
 import { useMutation } from '@tanstack/react-query';
 import { apipaths } from '../../config/apiPaths';
 import { axiosInstance } from '../../config/axios.config';
@@ -35,7 +39,7 @@ const Signup = () => {
     error,
     isPending: isLoading,
   } = useMutation<
-    AxiosResponse<LoginResponse>,
+    AxiosResponse<APIResponse<LoggedinUserReponse>>,
     AxiosError<AxiosError>,
     SignupData
   >({
