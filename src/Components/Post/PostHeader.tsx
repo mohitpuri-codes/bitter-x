@@ -1,4 +1,4 @@
-import { Typography } from 'antd';
+import Typography from 'antd/es/typography';
 import styles from '../../Pages/UI/home.module.css';
 import type { PostData } from '../../types/PostTypes';
 
