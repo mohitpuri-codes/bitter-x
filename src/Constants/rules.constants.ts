@@ -1,5 +1,5 @@
 import type { Rule } from 'antd/es/form';
-import { CreateAuthForm } from '../types/FormFields';
+import { CreateAuthForm, CreatePostForm } from '../types/FormFields';
 import { FIELDS_VALIDATION_MESSAGE } from './errors.constants';
 
 export const createAuthFormRules: Record<CreateAuthForm, Rule[]> = {
@@ -18,4 +18,15 @@ export const createAuthFormRules: Record<CreateAuthForm, Rule[]> = {
     { required: true, message: FIELDS_VALIDATION_MESSAGE.NO_PASSWORD },
     { min: 6, message: FIELDS_VALIDATION_MESSAGE.VALID_PASSWORD },
   ],
+};
+
+export const createPostFormRules: Record<CreatePostForm, Rule[]> = {
+  [CreatePostForm.content]: [
+    {
+      required: true,
+      message: FIELDS_VALIDATION_MESSAGE.NO_CONTENT,
+    },
+  ],
+  [CreatePostForm.images]: [{}],
+  [CreatePostForm.tags]: [{}],
 };

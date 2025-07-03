@@ -9,4 +9,8 @@ export const apipaths = {
   user: {
     profile: () => 'social-media/profile',
   },
+  posts: {
+    getAllPosts: () => 'social-media/posts?page=1&limit=10',
+    createPost: () => 'social-media/posts',
+  },
 };

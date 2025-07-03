@@ -1,5 +1,8 @@
-import type { FormProps } from 'antd';
-import { Button, Form, Input, notification } from 'antd';
+import type { FormProps } from 'antd/es/form';
+import Button from 'antd/es/button';
+import Form from 'antd/es/form';
+import Input from 'antd/es/input';
+import notification from 'antd/es/notification';
 import { Link, useNavigate } from 'react-router';
 import type { LoginResponse, SignupData } from '../../types/AuthTypes';
 import { useMutation } from '@tanstack/react-query';
