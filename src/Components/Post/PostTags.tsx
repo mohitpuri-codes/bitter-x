@@ -13,8 +13,8 @@ export default function PostTags({ postItem }: PostTagsProps) {
     <>
       {postItem.tags.length > 0 && (
         <div className={styles.tags}>
-          {postItem.tags.map((tagItem, index) => (
-            <Text key={index} type="secondary" className={styles.tag}>
+          {postItem.tags.map((tagItem) => (
+            <Text key={tagItem} type="secondary" className={styles.tag}>
               #{tagItem}
             </Text>
           ))}
