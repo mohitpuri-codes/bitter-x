@@ -4,15 +4,11 @@ import { apipaths } from '../../config/apiPaths';
 import Loader from '../../Components/Loader/Loader';
 import type { AxiosResponse } from 'axios';
 import type { GetAllPosts } from '../../types/PostTypes';
-import { Card, Row, Col, Avatar, Empty } from 'antd';
+import { Empty } from 'antd';
 import Fallback from '../../Components/Fallback /Fallback';
 import styles from './home.module.css';
-import PostHeader from '../../Components/Post/PostHeader';
-import PostImages from '../../Components/Post/PostImages';
-import PostTags from '../../Components/Post/PostTags';
-import PostActions from '../../Components/Post/PostActions';
-import PostContent from '../../Components/Post/PostContent';
 import { QueryKey } from '../../Constants/queryKeys.constants';
+import PostList from '../../Components/Post/PostList';
 
 export default function Home() {
   const { data, isLoading, isError } = useQuery<AxiosResponse<GetAllPosts>>({
@@ -37,20 +33,7 @@ export default function Home() {
       {(totalPostsLength ?? 0) > 0 ? (
         <div className={styles.feedContainer}>
           {posts?.map((postItem) => (
-            <Card key={postItem._id} className={styles.postCard}>
-              <Row align="top" gutter={[12, 0]}>
-                <Col flex="40px">
-                  <Avatar size={40} src={postItem.author?.account.avatar.url} />
-                </Col>
-                <Col flex="auto">
-                  <PostHeader postItem={postItem} />
-                  <PostContent postItem={postItem} />
-                  <PostImages postItem={postItem} />
-                  <PostTags postItem={postItem} />
-                  <PostActions postItem={postItem} />
-                </Col>
-              </Row>
-            </Card>
+            <PostList postItem={postItem} />
           ))}
         </div>
       ) : (
