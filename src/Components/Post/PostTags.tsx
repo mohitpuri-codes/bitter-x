@@ -9,8 +9,6 @@ interface PostTagsProps {
 }
 
 export default function PostTags({ postItem }: PostTagsProps) {
-  console.log(postItem.tags);
-
   return (
     <>
       {postItem.tags.length > 0 && (
