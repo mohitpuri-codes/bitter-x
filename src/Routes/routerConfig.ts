@@ -14,6 +14,7 @@ export interface RouteConfig {
   children?: RouteConfig[];
   index?: boolean;
   isAuth?: boolean;
+  isUnderMaintainance?: boolean;
 }
 
 export const routes: RouteConfig[] = [
@@ -31,16 +32,19 @@ export const routes: RouteConfig[] = [
         path: 'explore',
         element: Explore,
         isAuth: true,
+        isUnderMaintainance: true,
       },
       {
         path: 'bookmarks',
         element: Bookmarks,
         isAuth: true,
+        isUnderMaintainance: true,
       },
       {
         path: 'profile',
         element: Profile,
         isAuth: true,
+        isUnderMaintainance: true,
       },
       {
         path: 'tweet',

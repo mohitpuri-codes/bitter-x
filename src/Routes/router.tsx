@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router';
 import { routes, type RouteConfig } from './routerConfig';
 import PrivateRouter from './PrivateRouter';
+import UnderMaintainance from '../Components/Under Maintainance/UnderMaintainance';
 
 const Router = () => {
   return <Routes>{getRoutesComponent(routes)}</Routes>;
@@ -13,6 +14,13 @@ function getRoutesComponent(routeItem: RouteConfig[]) {
       Component = (
         <PrivateRouter>
           <routeItem.element />
+        </PrivateRouter>
+      );
+    }
+    if (routeItem.isUnderMaintainance) {
+      Component = (
+        <PrivateRouter>
+          <UnderMaintainance />
         </PrivateRouter>
       );
     }
