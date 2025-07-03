@@ -12,10 +12,11 @@ import PostImages from '../../Components/Post/PostImages';
 import PostTags from '../../Components/Post/PostTags';
 import PostActions from '../../Components/Post/PostActions';
 import PostContent from '../../Components/Post/PostContent';
+import { QueryKey } from '../../Constants/queryKeys.constants';
 
 export default function Home() {
   const { data, isLoading, isError } = useQuery<AxiosResponse<GetAllPosts>>({
-    queryKey: ['all-posts'],
+    queryKey: [QueryKey.allPosts],
     queryFn: () => axiosInstance.get(apipaths.posts.getAllPosts()),
   });
 
@@ -39,7 +40,7 @@ export default function Home() {
             <Card key={postItem._id} className={styles.postCard}>
               <Row align="top" gutter={[12, 0]}>
                 <Col flex="40px">
-                  <Avatar size={40} src={postItem.author.account.avatar.url} />
+                  <Avatar size={40} src={postItem.author?.account.avatar.url} />
                 </Col>
                 <Col flex="auto">
                   <PostHeader postItem={postItem} />

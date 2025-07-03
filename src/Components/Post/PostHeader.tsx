@@ -8,10 +8,10 @@ export default function PostHeader({ postItem }: { postItem: PostData }) {
   return (
     <div className={styles.userInfo}>
       <Text strong>
-        {postItem.author.firstName} {postItem.author.lastName}
+        {postItem.author?.firstName} {postItem.author?.lastName}
       </Text>
       <Text type="secondary" className={styles.username}>
-        @{postItem.author.account.username}
+        @{postItem.author?.account.username}
       </Text>
     </div>
   );
