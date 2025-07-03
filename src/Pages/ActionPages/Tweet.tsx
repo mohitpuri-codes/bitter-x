@@ -1,6 +1,4 @@
 import { useForm, type FormProps } from 'antd/es/form/Form';
-import { CreatePostForm } from '../../types/FormFields';
-import { useMutation } from '@tanstack/react-query';
 import notification from 'antd/es/notification';
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
@@ -8,18 +6,20 @@ import Button from 'antd/es/button';
 import Upload, { type UploadFile, type UploadProps } from 'antd/es/upload';
 import type { GetProp } from 'antd';
 import Image from 'antd/es/image';
+import { PlusOutlined } from '@ant-design/icons';
+import TextArea from 'antd/es/input/TextArea';
+import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import type { AxiosResponse, AxiosError } from 'axios';
 import { useNavigate } from 'react-router';
+import { CreatePostForm } from '../../types/FormFields';
 import { apipaths } from '../../config/apiPaths';
 import { axiosInstance } from '../../config/axios.config';
 import { ROUTE } from '../../Constants/routes.constants';
 import { createPostFormRules } from '../../Constants/rules.constants';
 import type { PostResponseSchema } from '../../types/PostTypes';
-import styles from '../ActionPages/tweet.module.css';
-import { useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
-import TextArea from 'antd/es/input/TextArea';
 import type { APIResponse } from '../../types/AuthTypes';
+import styles from '../ActionPages/tweet.module.css';
 
 // Extract the file type - From antD
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];

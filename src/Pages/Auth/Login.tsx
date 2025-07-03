@@ -1,23 +1,23 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { AxiosError, AxiosResponse } from 'axios';
 import Button from 'antd/es/button';
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import notification from 'antd/es/notification';
+import { useForm, type FormProps } from 'antd/es/form/Form';
 import { Link, useNavigate } from 'react-router';
+import { apipaths } from '../../config/apiPaths';
+import { axiosInstance } from '../../config/axios.config';
 import type {
   APIResponse,
   LoggedinUserReponse,
   LoginData,
 } from '../../types/AuthTypes';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { apipaths } from '../../config/apiPaths';
-import { axiosInstance } from '../../config/axios.config';
-import type { AxiosError, AxiosResponse } from 'axios';
-import { ROUTE } from '../../Constants/routes.constants';
-import { useForm, type FormProps } from 'antd/es/form/Form';
 import {
   CreateAuthForm,
   type CreateAuthFormType,
 } from '../../types/FormFields';
+import { ROUTE } from '../../Constants/routes.constants';
 import { createAuthFormRules } from '../../Constants/rules.constants';
 import styles from './auth.module.css';
 import { QueryKey } from '../../Constants/queryKeys.constants';

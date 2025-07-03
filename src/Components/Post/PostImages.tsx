@@ -1,5 +1,5 @@
-import type { PostData } from '../../types/PostTypes';
 import Image from 'antd/es/image';
+import type { PostData } from '../../types/PostTypes';
 import styles from '../../Pages/UI/home.module.css';
 
 interface PostImagesProps {
