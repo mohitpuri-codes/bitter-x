@@ -18,11 +18,7 @@ function getRoutesComponent(routeItem: RouteConfig[]) {
       );
     }
     if (routeItem.isUnderMaintainance) {
-      Component = (
-        <PrivateRouter>
-          <UnderMaintainance />
-        </PrivateRouter>
-      );
+      Component = <UnderMaintainance />;
     }
     if (routeItem.children) {
       return (
