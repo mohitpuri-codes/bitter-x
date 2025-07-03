@@ -3,7 +3,11 @@ import { MessageOutlined, HeartOutlined } from '@ant-design/icons';
 import type { PostData } from '../../types/PostTypes';
 import styles from '../../Pages/UI/home.module.css';
 
-export default function PostActions({ postItem }: { postItem: PostData }) {
+interface PostActionsProps {
+  postItem: PostData;
+}
+
+export default function PostActions({ postItem }: PostActionsProps) {
   return (
     <Space size="large" className={styles.actions}>
       <button>

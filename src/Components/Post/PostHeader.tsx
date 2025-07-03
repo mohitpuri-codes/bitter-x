@@ -4,7 +4,11 @@ import type { PostData } from '../../types/PostTypes';
 
 const { Text } = Typography;
 
-export default function PostHeader({ postItem }: { postItem: PostData }) {
+interface PostHeaderProps {
+  postItem: PostData;
+}
+
+export default function PostHeader({ postItem }: PostHeaderProps) {
   return (
     <div className={styles.userInfo}>
       <Text strong>

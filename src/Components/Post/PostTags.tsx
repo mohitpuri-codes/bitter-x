@@ -4,7 +4,11 @@ import styles from '../../Pages/UI/home.module.css';
 
 const { Text } = Typography;
 
-export default function PostTags({ postItem }: { postItem: PostData }) {
+interface PostTagsProps {
+  postItem: PostData;
+}
+
+export default function PostTags({ postItem }: PostTagsProps) {
   return (
     <>
       {postItem.tags.length > 0 && (

@@ -2,7 +2,11 @@ import type { PostData } from '../../types/PostTypes';
 import { Image } from 'antd';
 import styles from '../../Pages/UI/home.module.css';
 
-export default function PostImages({ postItem }: { postItem: PostData }) {
+interface PostImagesProps {
+  postItem: PostData;
+}
+
+export default function PostImages({ postItem }: PostImagesProps) {
   return (
     <>
       {postItem.images.length > 0 && (
