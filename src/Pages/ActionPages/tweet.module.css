@@ -44,3 +44,12 @@
   display: flex;
   margin-bottom: 8px;
 }
+
+.uploadButton {
+  border: 0;
+  background: none;
+}
+
+.uploadButton div {
+  margin-top: 8px;
+}

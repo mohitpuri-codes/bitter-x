@@ -63,9 +63,9 @@ export default function Tweet() {
     setFileList(newFileList);
 
   const uploadButton = (
-    <button style={{ border: 0, background: 'none' }} type="button">
+    <button className={styles.uploadButton} type="button">
       <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
+      <div>Upload</div>
     </button>
   );
 
@@ -195,7 +195,7 @@ export default function Tweet() {
                     danger
                     type="text"
                     onClick={() => removeTagField(index)}
-                    style={{ marginLeft: 8 }}
+                    className={styles.dangerButton}
                   >
                     Remove
                   </Button>
