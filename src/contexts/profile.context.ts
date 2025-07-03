@@ -1,8 +1,8 @@
 import { createContext, useContext } from 'react';
-import type { LoginResponse } from '../types/AuthTypes';
+import type { APIResponse, LoggedinUserReponse } from '../types/AuthTypes';
 
 type ProfileContextType = {
-  profile: LoginResponse | null;
+  profile: APIResponse<LoggedinUserReponse> | null;
   isLoading: boolean;
   isAuthenticated: boolean;
 };
