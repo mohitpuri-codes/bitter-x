@@ -45,7 +45,7 @@ export default function Tweet() {
   const [api, contextHolder] = notification.useNotification();
   const [previewOpen, setPreviewOpen] = useState(false); //state to toggle the preview of files
   const [previewImage, setPreviewImage] = useState(''); //show the images uploaded by user
-  const [tags, setTags] = useState<string[]>(['']); // store the tags inserted by users
+  const [tags, setTags] = useState<string>(''); // store the tags inserted by users
   const [fileList, setFileList] = useState<UploadFile[]>([]); //store the images uploaded by user
 
   // method to handle the preview of the images
@@ -68,22 +68,6 @@ export default function Tweet() {
       <div>Upload</div>
     </button>
   );
-
-  const handleTagChange = (index: number, value: string) => {
-    const newTags = [...tags];
-    newTags[index] = value;
-    setTags(newTags);
-  };
-
-  const addTagField = () => {
-    setTags([...tags, '']);
-  };
-
-  const removeTagField = (index: number) => {
-    const newTags = [...tags];
-    newTags.splice(index, 1);
-    setTags(newTags);
-  };
 
   const { mutateAsync: postCreationMutation, isPending: isLoading } =
     useMutation<
@@ -114,7 +98,7 @@ export default function Tweet() {
 
       onError: (error) => {
         api.error({
-          message: error.response?.data.message,
+          message: error.response?.data.message || 'An error occurred.',
           placement: 'topRight',
         });
       },
@@ -125,10 +109,15 @@ export default function Tweet() {
       .filter((file) => file.originFileObj)
       .map((file) => file.originFileObj as File);
 
+    const tagArray = tags
+      .split(',')
+      .map((tag) => tag.trim())
+      .filter((tag) => tag.length > 0);
+
     postCreationMutation({
       content: values.content,
       images: files,
-      tags,
+      tags: tagArray,
     });
   };
 
@@ -182,30 +171,13 @@ export default function Tweet() {
               )}
             </>
           </Form.Item>
-          <Form.Item label="Tags">
-            <div className={styles.tags}>
-              {tags.map((tag, index) => (
-                <div key={index} className={styles.tagItem}>
-                  <Input
-                    value={tag}
-                    onChange={(e) => handleTagChange(index, e.target.value)}
-                    placeholder={`Tag ${index + 1}`}
-                    required
-                  />
-                  <Button
-                    danger
-                    type="text"
-                    onClick={() => removeTagField(index)}
-                    className={styles.dangerButton}
-                  >
-                    Remove
-                  </Button>
-                </div>
-              ))}
-            </div>
-            <Button type="dashed" onClick={addTagField} icon={<PlusOutlined />}>
-              Add Tag
-            </Button>
+
+          <Form.Item label="Tags (comma-separated)">
+            <Input
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
+              placeholder="e.g. react, javascript, webdev"
+            />
           </Form.Item>
 
           <Button type="primary" htmlType="submit" disabled={isLoading} block>

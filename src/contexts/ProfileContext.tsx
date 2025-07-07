@@ -7,6 +7,8 @@ import { ProfileContext } from './profile.context';
 import { QueryKey } from '../Constants/queryKeys.constants';
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
+  console.log('call');
+
   const { data, isLoading, isError } = useQuery<
     APIResponse<LoggedinUserReponse>
   >({
