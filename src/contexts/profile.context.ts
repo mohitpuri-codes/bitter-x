@@ -5,12 +5,16 @@ type ProfileContextType = {
   profile: APIResponse<LoggedinUserReponse> | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  refetchProfile: () => void;
+  enabled: boolean;
 };
 
 export const ProfileContext = createContext<ProfileContextType>({
   profile: null,
   isLoading: true,
   isAuthenticated: false,
+  refetchProfile: () => {},
+  enabled: false,
 });
 
 export const useProfile = () => useContext(ProfileContext);
