@@ -18,7 +18,6 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   });
 
   const refetchProfile = useCallback(() => {
-    console.log('refetch');
     setEnabled(true);
   }, []);
 
