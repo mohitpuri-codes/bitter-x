@@ -16,10 +16,9 @@ function PrivateRouter({ children }: { children: ReactNode }) {
     }
   }, [profile, refetchProfile, enabled]);
 
-  if (isLoading || !isAuthenticated || !token) return <Loader />;
+  if (isLoading) return <Loader />;
+  if (isAuthenticated || token) return <>{children}</>;
   if (!isAuthenticated || !token) return <Navigate to={ROUTE.SIGNUP} />;
-
-  return children;
 }
 
 export default PrivateRouter;
