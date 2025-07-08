@@ -30,10 +30,9 @@ axiosInstance.interceptors.response.use(
   },
   function (error) {
     //  handle 401 Unauthorized errors
-    //  handle 404 User not found
-    if (error.response.status === 401 || error.response.status === 404) {
+    if (error.response.status === 401) {
       window.location.href = ROUTE.SIGNUP;
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
   }
 );

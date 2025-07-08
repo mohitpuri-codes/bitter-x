@@ -20,7 +20,7 @@ function PrivateRouter({ children }: { children: ReactNode }) {
   console.log(isAuthenticated, 'auth');
   console.log(isLoading, 'loading');
 
-  if (isLoading || !token) return <Loader />;
+  if (isLoading || !isAuthenticated || !token) return <Loader />;
   if (!isAuthenticated || !token) return <Navigate to={ROUTE.SIGNUP} />;
 
   return children;
