@@ -8,8 +8,8 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router';
-import styles from './sidebar.module.css';
 import { ROUTE } from '../../Constants/routes.constants';
+import styles from './sidebar.module.css';
 
 export default function Sidebar() {
   const location = useLocation();

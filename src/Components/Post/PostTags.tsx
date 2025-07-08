@@ -1,6 +1,6 @@
+import Typography from 'antd/es/typography';
 import type { PostData } from '../../types/PostTypes';
 import styles from '../../Pages/UI/home.module.css';
-import Typography from 'antd/es/typography';
 
 const { Text } = Typography;
 
@@ -15,7 +15,7 @@ export default function PostTags({ postItem }: PostTagsProps) {
         <div className={styles.tags}>
           {postItem.tags.map((tagItem) => (
             <Text key={tagItem} type="secondary" className={styles.tag}>
-              #{tagItem}
+              {`#${tagItem}`}
             </Text>
           ))}
         </div>

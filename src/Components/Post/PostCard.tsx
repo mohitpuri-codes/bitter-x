@@ -1,8 +1,8 @@
-import type { PostData } from '../../types/PostTypes';
-import styles from '../../Pages/UI/home.module.css';
 import Card from 'antd/es/card/Card';
 import Row from 'antd/es/row';
 import Col from 'antd/es/col';
+import type { PostData } from '../../types/PostTypes';
+import styles from '../../Pages/UI/home.module.css';
 import PostActions from './PostActions';
 import PostContent from './PostContent';
 import PostHeader from './PostHeader';

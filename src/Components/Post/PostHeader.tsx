@@ -1,8 +1,8 @@
 import Typography from 'antd/es/typography';
-import styles from '../../Pages/UI/home.module.css';
-import type { PostData } from '../../types/PostTypes';
 import Avatar from 'antd/es/avatar/Avatar';
 import Col from 'antd/es/col';
+import styles from '../../Pages/UI/home.module.css';
+import type { PostData } from '../../types/PostTypes';
 
 const { Text } = Typography;
 

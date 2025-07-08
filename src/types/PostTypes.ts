@@ -1,19 +1,14 @@
 export interface GetAllPosts {
-  statusCode: number;
-  data: {
-    posts: PostData[];
-    totalPosts: number;
-    limit: number;
-    page: number;
-    totalPages: number;
-    serialNumberStartFrom: number;
-    hasPrevPage: boolean;
-    hasNextPage: boolean;
-    prevPage: null;
-    nextPage: null;
-  };
-  message: string;
-  success: boolean;
+  posts: PostData[];
+  totalPosts: number;
+  limit: number;
+  page: number;
+  totalPages: number;
+  serialNumberStartFrom: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: null;
+  nextPage: null;
 }
 
 export interface PostData {
@@ -38,29 +33,24 @@ export interface PostData {
 }
 
 export interface PostResponseSchema {
-  statusCode: 201;
-  data: {
-    _id: string;
-    content: string;
-    tags: Array<string>;
-    images: [
-      {
-        url: string;
-        localPath: string;
-        _id: string;
-      },
-    ];
-    author: UserSchema;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-    comments: number;
-    likes: number;
-    isLiked: boolean;
-    isBookmarked: boolean;
-  };
-  message: string;
-  success: boolean;
+  _id: string;
+  content: string;
+  tags: Array<string>;
+  images: [
+    {
+      url: string;
+      localPath: string;
+      _id: string;
+    },
+  ];
+  author: UserSchema;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  comments: number;
+  likes: number;
+  isLiked: boolean;
+  isBookmarked: boolean;
 }
 
 export interface UserSchema {
