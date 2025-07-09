@@ -29,6 +29,7 @@
 
 .imageContainer {
   margin: 10px 0;
+  width: fit-content;
 }
 
 .postImage {

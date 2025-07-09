@@ -44,7 +44,6 @@ export const routes: RouteConfig[] = [
         path: 'profile',
         element: Profile,
         isAuth: true,
-        isUnderMaintainance: true,
       },
       {
         path: 'tweet',
