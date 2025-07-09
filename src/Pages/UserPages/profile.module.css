@@ -13,3 +13,15 @@
   margin: 0 auto;
   padding: 1rem;
 }
+
+.profileTitle {
+  margin-bottom: 0;
+}
+
+.profileBio {
+  margin-top: 8px;
+}
+
+.profileCount {
+  margin-top: 16px;
+}
