@@ -63,14 +63,14 @@ export default function Profile() {
               <Avatar size={100} src={user?.account?.avatar.url} />
             </Col>
             <Col flex="auto">
-              <Title level={3} style={{ marginBottom: 0 }}>
+              <Title level={3} className={styles.profileTitle}>
                 {user?.firstName} {user?.lastName}
               </Title>
               <Text type="secondary">@{user?.account.username}</Text>
-              <div style={{ marginTop: 8 }}>
+              <div className={styles.profileBio}>
                 <Text>{user?.bio}</Text>
               </div>
-              <div style={{ marginTop: 12 }}>
+              <div className={styles.profileCount}>
                 <Text strong>{user?.followingCount}</Text> Following
                 &nbsp;&nbsp;
                 <Text strong>{user?.followersCount}</Text> Followers
