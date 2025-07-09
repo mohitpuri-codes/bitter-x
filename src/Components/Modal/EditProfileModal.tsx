@@ -18,6 +18,7 @@ import {
   EditProfileForm,
   type EditProfileFormType,
 } from '../../types/FormFields';
+import { editProfileFormRules } from '../../Constants/rules.constants';
 const { TextArea } = Input;
 
 interface EditProfileModalProps {
@@ -121,7 +122,7 @@ export default function EditProfileModal({
           <Form.Item
             name={EditProfileForm.FirstName}
             label="First Name"
-            rules={[{ required: true, message: 'Please enter first name' }]}
+            rules={editProfileFormRules[EditProfileForm.FirstName]}
           >
             <Input />
           </Form.Item>
@@ -129,15 +130,15 @@ export default function EditProfileModal({
           <Form.Item
             name={EditProfileForm.LastName}
             label="Last Name"
-            rules={[{ required: true, message: 'Please enter last name' }]}
+            rules={editProfileFormRules[EditProfileForm.LastName]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            name="bio"
-            label={EditProfileForm.Bio}
-            rules={[{ required: true, message: 'Enter you Bio' }]}
+            name={EditProfileForm.Bio}
+            label="Bio"
+            rules={editProfileFormRules[EditProfileForm.Bio]}
           >
             <TextArea rows={3} />
           </Form.Item>
@@ -145,7 +146,7 @@ export default function EditProfileModal({
           <Form.Item
             name={EditProfileForm.CountryCode}
             label="Country Code"
-            rules={[{ required: true, message: 'Please select country code' }]}
+            rules={editProfileFormRules[EditProfileForm.CountryCode]}
           >
             <Select>
               <Select.Option value="+91">+91 (India)</Select.Option>
@@ -155,15 +156,9 @@ export default function EditProfileModal({
           </Form.Item>
 
           <Form.Item
-            name="phoneNumber"
-            label={EditProfileForm.PhoneNumber}
-            rules={[
-              { required: true, message: 'Please enter phone number' },
-              {
-                pattern: /^[0-9]{10,15}$/,
-                message: 'Enter valid phone number',
-              },
-            ]}
+            name={EditProfileForm.PhoneNumber}
+            label="Phone Number"
+            rules={editProfileFormRules[EditProfileForm.PhoneNumber]}
           >
             <Input />
           </Form.Item>
@@ -171,7 +166,7 @@ export default function EditProfileModal({
           <Form.Item
             name={EditProfileForm.Location}
             label="Location"
-            rules={[{}]}
+            rules={editProfileFormRules[EditProfileForm.Location]}
           >
             <Input />
           </Form.Item>
