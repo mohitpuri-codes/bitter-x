@@ -4,7 +4,6 @@ import Typography from 'antd/es/typography';
 import Row from 'antd/es/row';
 import Col from 'antd/es/col';
 import Divider from 'antd/es/divider';
-import List from 'antd/es/list';
 import styles from './profile.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '../../config/axios.config';
@@ -14,9 +13,9 @@ import Loader from '../../Components/Loader/Loader';
 import type { APIResponse } from '../../types/AuthTypes';
 import type { GetAllPosts, UserSchema } from '../../types/PostTypes';
 import type { AxiosResponse } from 'axios';
-import PostCard from '../../Components/Post/PostCard';
 import EditProfileModal from '../../Components/Modal/EditProfileModal';
 import { QueryKey } from '../../Constants/queryKeys.constants';
+import UserPosts from '../../Components/Post/UserPosts';
 
 const { Title, Text } = Typography;
 
@@ -29,6 +28,10 @@ export default function Profile() {
     queryKey: [QueryKey.userInfo],
     queryFn: () => axiosInstance.get(apipaths.user.profile()),
   });
+
+  if (userInfo?.data.data) {
+    <Fallback />;
+  }
 
   const username = userInfo?.data.data.account.username;
 
@@ -87,20 +90,7 @@ export default function Profile() {
 
       <Title level={4}>Posts</Title>
 
-      {isPostsLoading ? (
-        <Loader />
-      ) : (
-        <List
-          itemLayout="vertical"
-          dataSource={posts}
-          className={styles.feedContainer}
-          renderItem={(post) => (
-            <div className={styles.feedContainer}>
-              <PostCard key={post._id} postItem={post} />
-            </div>
-          )}
-        />
-      )}
+      <UserPosts isPostsLoading={isPostsLoading} posts={posts} />
     </div>
   );
 }
