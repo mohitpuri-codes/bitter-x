@@ -55,5 +55,8 @@ export const editProfileFormRules: Record<EditProfileForm, Rule[]> = {
       message: FIELDS_VALIDATION_MESSAGE.VALID_PHONE_NUMBER,
     },
   ],
-  [EditProfileForm.Location]: [{}],
+  [EditProfileForm.Location]: [
+    { required: true },
+    { message: FIELDS_VALIDATION_MESSAGE.NO_LOCATION },
+  ],
 };

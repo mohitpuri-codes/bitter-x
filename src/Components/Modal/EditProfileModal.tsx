@@ -6,8 +6,6 @@ import Input from 'antd/es/input';
 import Select from 'antd/es/select';
 import notification from 'antd/es/notification';
 import type { UserSchema } from '../../types/PostTypes';
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosInstance } from '../../config/axios.config';
 import { apipaths } from '../../config/apiPaths';
@@ -32,32 +30,16 @@ export default function EditProfileModal({
   const [form] = Form.useForm<EditProfileFormType>();
   const [api, contextHolder] = notification.useNotification();
   const queryClient = useQueryClient();
-
-  const showModal = () => {
-    setOpen(true);
-
-    form.setFieldsValue({
-      firstName: userProfile?.firstName,
-      lastName: userProfile?.lastName,
-      bio: userProfile?.bio,
-      phoneNumber: userProfile?.phoneNumber,
-      countryCode: userProfile?.countryCode,
-      location: userProfile?.location,
-    });
-  };
-
-  const { mutateAsync: userProfileMutation, isPending } = useMutation<
+  const { mutate: userProfileMutation, isPending } = useMutation<
     AxiosResponse<APIResponse<UserSchema>>,
     AxiosError<Error>,
     EditProfileFormType
   >({
     mutationFn: (data) => axiosInstance.patch(apipaths.user.profile(), data),
     onSuccess: (data) => {
-      console.log(data);
-
       if (!data || !data.data.success) {
         api.error({
-          message: 'Something went Wrong',
+          message: data.data.message,
           placement: 'topRight',
         });
         return;
@@ -78,6 +60,20 @@ export default function EditProfileModal({
     },
   });
 
+  if (!userProfile) return;
+  const showModal = () => {
+    setOpen(true);
+
+    form.setFieldsValue({
+      firstName: userProfile.firstName,
+      lastName: userProfile.lastName,
+      bio: userProfile.bio,
+      phoneNumber: userProfile.phoneNumber,
+      countryCode: userProfile.countryCode,
+      location: userProfile.location,
+    });
+  };
+
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
@@ -92,18 +88,12 @@ export default function EditProfileModal({
       });
     } catch (error) {
       console.error('Validation Failed:', error);
-      api.error({
-        message: 'Validation Error',
-        placement: 'topRight',
-      });
     }
   };
 
   const handleCancel = () => {
     setOpen(false);
   };
-
-  dayjs.extend(customParseFormat);
 
   return (
     <>

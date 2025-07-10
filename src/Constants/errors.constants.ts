@@ -14,4 +14,5 @@ export const FIELDS_VALIDATION_MESSAGE = {
   NO_COUNTRY_CODE: 'Please select country code',
   NO_PHONE_NUMBER: 'Please enter phone number',
   VALID_PHONE_NUMBER: 'Enter valid phone number',
+  NO_LOCATION: 'Enter your Location',
 };
