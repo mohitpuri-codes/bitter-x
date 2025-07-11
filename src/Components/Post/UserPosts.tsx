@@ -1,4 +1,3 @@
-import Loader from '../Loader/Loader';
 import PostCard from './PostCard';
 import styles from '../../Pages/UserPages/profile.module.css';
 import type { PostData } from '../../types/PostTypes';
@@ -9,23 +8,17 @@ interface UserPostsProps {
   posts: PostData[] | undefined;
 }
 
-export default function UserPosts({ isPostsLoading, posts }: UserPostsProps) {
+export default function UserPosts({ posts }: UserPostsProps) {
   return (
-    <>
-      {isPostsLoading ? (
-        <Loader />
-      ) : (
-        <List
-          itemLayout="vertical"
-          dataSource={posts}
-          className={styles.feedContainer}
-          renderItem={(post) => (
-            <div className={styles.feedContainer}>
-              <PostCard key={post._id} postItem={post} />
-            </div>
-          )}
-        />
+    <List
+      itemLayout="vertical"
+      dataSource={posts}
+      className={styles.feedContainer}
+      renderItem={(post) => (
+        <div className={styles.feedContainer}>
+          <PostCard key={post._id} postItem={post} />
+        </div>
       )}
-    </>
+    />
   );
 }

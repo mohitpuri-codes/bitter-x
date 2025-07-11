@@ -20,7 +20,7 @@ import { editProfileFormRules } from '../../Constants/rules.constants';
 const { TextArea } = Input;
 
 interface EditProfileModalProps {
-  userProfile: UserSchema | undefined;
+  userProfile: UserSchema;
 }
 
 export default function EditProfileModal({
@@ -60,7 +60,6 @@ export default function EditProfileModal({
     },
   });
 
-  if (!userProfile) return;
   const showModal = () => {
     setOpen(true);
 

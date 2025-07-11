@@ -8,6 +8,7 @@ import Button from 'antd/es/button';
 import type { APIResponse, LoggedinUserReponse } from '../../types/AuthTypes';
 import type { CreatePostData } from '../../types/CreatePostFormTypes';
 import useNotification from 'antd/es/notification/useNotification';
+import { SUCCESS_MESSAGES } from '../../Constants/success.constants';
 
 export default function SeedPosts() {
   const queryClient = useQueryClient();
@@ -15,7 +16,7 @@ export default function SeedPosts() {
 
   const { mutateAsync: seedPostMutation } = useMutation<
     AxiosResponse<APIResponse<LoggedinUserReponse>>,
-    AxiosError<AxiosError>,
+    AxiosError<Error>,
     CreatePostData
   >({
     mutationFn: (data) => {
@@ -54,7 +55,7 @@ export default function SeedPosts() {
       }
 
       api.success({
-        message: '5 posts seeded successfully!',
+        message: SUCCESS_MESSAGES.POST_CREATION,
         placement: 'topRight',
       });
       queryClient.invalidateQueries({ queryKey: [QueryKey.allPosts] });

@@ -55,6 +55,8 @@ export default function Profile() {
 
   const user = userInfo?.data.data;
   const posts = userPosts?.data?.data?.posts;
+  if (!user) return;
+
   return (
     <div className={styles.profileContainer}>
       {isLoading ? (
@@ -90,7 +92,11 @@ export default function Profile() {
 
       <Title level={4}>Posts</Title>
 
-      <UserPosts isPostsLoading={isPostsLoading} posts={posts} />
+      {isPostsLoading ? (
+        <Loader />
+      ) : (
+        <UserPosts isPostsLoading={isPostsLoading} posts={posts} />
+      )}
     </div>
   );
 }
