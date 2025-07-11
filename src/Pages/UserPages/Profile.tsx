@@ -5,7 +5,7 @@ import Row from 'antd/es/row';
 import Col from 'antd/es/col';
 import Divider from 'antd/es/divider';
 import styles from './profile.module.css';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '../../config/axios.config';
 import { apipaths } from '../../config/apiPaths';
 import Fallback from '../../Components/Fallback /Fallback';
@@ -16,10 +16,19 @@ import type { AxiosResponse } from 'axios';
 import EditProfileModal from '../../Components/Modal/EditProfileModal';
 import { QueryKey } from '../../Constants/queryKeys.constants';
 import UserPosts from '../../Components/Post/UserPosts';
+import Button from 'antd/es/button';
+import logout from '../../assets/logout.svg';
+import { TOKEN } from '../../Constants/globals.constants';
+import useNotification from 'antd/es/notification/useNotification';
+import { useNavigate } from 'react-router';
+import { ROUTE } from '../../Constants/routes.constants';
 
 const { Title, Text } = Typography;
 
 export default function Profile() {
+  const [api, contextHolder] = useNotification();
+  const navigate = useNavigate();
+
   const {
     data: userInfo,
     isError,
@@ -49,54 +58,81 @@ export default function Profile() {
       axiosInstance.get(apipaths.user.getMyPosts(username as string)),
   });
 
+  const { mutate: userLogoutMutation } = useMutation<
+    AxiosResponse<APIResponse<null>>
+  >({
+    mutationFn: () => axiosInstance.post(apipaths.auth.logout()),
+    onSuccess: (data) => {
+      localStorage.removeItem(TOKEN);
+      api.success({
+        message: data.data.message,
+      });
+      navigate(ROUTE.SIGNUP);
+    },
+  });
+
   if (isError || isPostError) {
     <Fallback />;
   }
 
   const user = userInfo?.data.data;
   const posts = userPosts?.data?.data?.posts;
+
+  function handleLogoutClick() {
+    userLogoutMutation();
+  }
+
   if (!user) return;
 
   return (
-    <div className={styles.profileContainer}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Card className={styles.profileCard}>
-          <Row gutter={[16, 16]} align="middle">
-            <Col>
-              <Avatar size={100} src={user?.account?.avatar.url} />
-            </Col>
-            <Col flex="auto">
-              <Title level={3} className={styles.profileTitle}>
-                {user?.firstName} {user?.lastName}
-              </Title>
-              <Text type="secondary">@{user?.account.username}</Text>
-              <div className={styles.profileBio}>
-                <Text>{user?.bio}</Text>
-              </div>
-              <div className={styles.profileCount}>
-                <Text strong>{user?.followingCount}</Text> Following
-                &nbsp;&nbsp;
-                <Text strong>{user?.followersCount}</Text> Followers
-              </div>
-            </Col>
-            <Col>
-              <EditProfileModal userProfile={user} />
-            </Col>
-          </Row>
-        </Card>
-      )}
+    <>
+      {contextHolder}
+      <div className={styles.profileContainer}>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Card className={styles.profileCard}>
+            <Row gutter={[16, 16]} align="middle">
+              <Col>
+                <Avatar size={100} src={user?.account?.avatar.url} />
+              </Col>
+              <Col flex="auto">
+                <Title level={3} className={styles.profileTitle}>
+                  {user?.firstName} {user?.lastName}
+                </Title>
+                <Text type="secondary">@{user?.account.username}</Text>
+                <div className={styles.profileBio}>
+                  <Text>{user?.bio}</Text>
+                </div>
+                <div className={styles.profileCount}>
+                  <Text strong>{user?.followingCount}</Text> Following
+                  &nbsp;&nbsp;
+                  <Text strong>{user?.followersCount}</Text> Followers
+                </div>
+              </Col>
+              <Col className={styles.logoutWrapper}>
+                <EditProfileModal userProfile={user} />
+                <Button onClick={handleLogoutClick} className={styles.logout}>
+                  <div>
+                    <img src={logout} alt="logout" />
+                    <span>Logout</span>
+                  </div>
+                </Button>
+              </Col>
+            </Row>
+          </Card>
+        )}
 
-      <Divider />
+        <Divider />
 
-      <Title level={4}>Posts</Title>
+        <Title level={4}>Posts</Title>
 
-      {isPostsLoading ? (
-        <Loader />
-      ) : (
-        <UserPosts isPostsLoading={isPostsLoading} posts={posts} />
-      )}
-    </div>
+        {isPostsLoading ? (
+          <Loader />
+        ) : (
+          <UserPosts isPostsLoading={isPostsLoading} posts={posts} />
+        )}
+      </div>
+    </>
   );
 }

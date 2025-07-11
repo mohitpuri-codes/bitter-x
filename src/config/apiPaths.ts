@@ -5,6 +5,7 @@ export const apipaths = {
   auth: {
     login: () => `users/login`,
     signup: () => `users/register`,
+    logout: () => 'users/logout',
   },
   user: {
     profile: () => 'social-media/profile',
