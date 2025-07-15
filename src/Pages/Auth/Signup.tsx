@@ -1,23 +1,18 @@
 import { useMutation } from '@tanstack/react-query';
 import type { AxiosError, AxiosResponse } from 'axios';
-
 import Button from 'antd/es/button';
 import Form from 'antd/es/form';
 import type { FormProps } from 'antd/es/form';
 import Input from 'antd/es/input';
 import notification from 'antd/es/notification';
 import { useForm } from 'antd/es/form/Form';
-
 import { Link, useNavigate } from 'react-router';
-
-import { apipaths } from '../../config/apiPaths';
-import { axiosInstance } from '../../config/axios.config';
 import type {
   APIResponse,
   LoggedinUserReponse,
   SignupData,
+  ErrorResponse,
 } from '../../types/AuthTypes';
-import { VALIDATION_ERROR } from '../../Constants/errors.constants';
 import { ROUTE } from '../../Constants/routes.constants';
 import {
   CreateAuthForm,
@@ -25,6 +20,9 @@ import {
 } from '../../types/FormFields';
 import { createAuthFormRules } from '../../Constants/rules.constants';
 import styles from './auth.module.css';
+import axios from 'axios';
+import { apipaths } from '../../config/apiPaths';
+import { VALIDATION_ERROR } from '../../Constants/errors.constants';
 
 type FieldType = {
   email: string;
@@ -43,10 +41,14 @@ const Signup = () => {
     isPending: isLoading,
   } = useMutation<
     AxiosResponse<APIResponse<LoggedinUserReponse>>,
-    AxiosError<AxiosError>,
+    AxiosError<ErrorResponse>,
     SignupData
   >({
-    mutationFn: (data) => axiosInstance.post(apipaths.auth.signup(), data),
+    mutationFn: (data) =>
+      axios.post(
+        `${import.meta.env.VITE_BASE_URL}${apipaths.auth.signup()}`,
+        data
+      ),
     onSuccess: (data) => {
       if (!data || !data.data.success || error) {
         console.error('Something went wrong');
@@ -55,9 +57,15 @@ const Signup = () => {
       navigate(ROUTE.LOGIN);
     },
     onError: (error) => {
+      const errorMessage = error.response?.data?.message || VALIDATION_ERROR;
+      const errorDescription =
+        error.response?.data?.errors?.[0]?.username ||
+        error.response?.data?.errors?.[0]?.email ||
+        error.response?.data?.errors?.[0]?.password;
+
       api.error({
-        message: VALIDATION_ERROR,
-        description: error.response?.data.message,
+        message: errorMessage,
+        description: errorDescription,
         placement: 'topRight',
       });
     },

@@ -38,3 +38,12 @@ export interface SignupData {
   username: string;
   password: string;
 }
+
+export interface ErrorResponse {
+  message: string;
+  errors?: Array<{
+    username?: string;
+    email?: string;
+    password?: string;
+  }>;
+}

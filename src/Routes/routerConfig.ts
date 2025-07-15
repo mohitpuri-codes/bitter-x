@@ -38,7 +38,6 @@ export const routes: RouteConfig[] = [
         path: 'bookmarks',
         element: Bookmarks,
         isAuth: true,
-        isUnderMaintainance: true,
       },
       {
         path: 'profile',
