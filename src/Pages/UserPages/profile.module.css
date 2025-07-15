@@ -1,0 +1,49 @@
+.profileContainer {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.profileCard {
+  padding: 24px;
+}
+
+.feedContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.profileTitle {
+  margin-bottom: 0;
+}
+
+.profileBio {
+  margin-top: 8px;
+}
+
+.profileCount {
+  margin-top: 16px;
+}
+
+.logoutWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.logout {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.logout div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout img {
+  width: 20px;
+}

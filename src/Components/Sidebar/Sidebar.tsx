@@ -10,6 +10,7 @@ import {
 import { Link, useLocation } from 'react-router';
 import { ROUTE } from '../../Constants/routes.constants';
 import styles from './sidebar.module.css';
+import SeedPosts from '../SeedPosts/SeedPosts';
 
 export default function Sidebar() {
   const location = useLocation();
@@ -63,6 +64,8 @@ export default function Sidebar() {
           </Button>
         </Link>
       </div>
+
+      <SeedPosts />
     </Sider>
   );
 }

@@ -62,6 +62,8 @@ export interface UserSchema {
   };
   firstName: string;
   lastName: string;
+  followersCount: number;
+  followingCount: number;
   bio: string;
   dob: null;
   location: string;
