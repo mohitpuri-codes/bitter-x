@@ -6,12 +6,11 @@ import Input from 'antd/es/input';
 import notification from 'antd/es/notification';
 import { useForm, type FormProps } from 'antd/es/form/Form';
 import { Link, useNavigate } from 'react-router';
-import { apipaths } from '../../config/apiPaths';
-import { axiosInstance } from '../../config/axios.config';
 import type {
   APIResponse,
   LoggedinUserReponse,
   LoginData,
+  ErrorResponse,
 } from '../../types/AuthTypes';
 import {
   CreateAuthForm,
@@ -22,6 +21,8 @@ import { createAuthFormRules } from '../../Constants/rules.constants';
 import styles from './auth.module.css';
 import { QueryKey } from '../../Constants/queryKeys.constants';
 import { TOKEN } from '../../Constants/globals.constants';
+import axios from 'axios';
+import { apipaths } from '../../config/apiPaths';
 
 type FieldType = {
   username: string;
@@ -40,10 +41,14 @@ const Login = () => {
     isPending: isLoading,
   } = useMutation<
     AxiosResponse<APIResponse<LoggedinUserReponse>>,
-    AxiosError<AxiosError>,
+    AxiosError<ErrorResponse>,
     LoginData
   >({
-    mutationFn: (data) => axiosInstance.post(apipaths.auth.login(), data),
+    mutationFn: (data) =>
+      axios.post(
+        `${import.meta.env.VITE_BASE_URL}${apipaths.auth.login()}`,
+        data
+      ),
     onSuccess: async (data) => {
       if (!data || !data.data.success || error) {
         console.error('Something went wrong');
@@ -57,7 +62,7 @@ const Login = () => {
     },
     onError: (error) => {
       api.error({
-        message: error.response?.data.message,
+        message: error.response?.data?.message,
         placement: 'topRight',
       });
     },
