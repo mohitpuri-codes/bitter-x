@@ -84,3 +84,23 @@ export interface UserSchema {
     email: string;
   };
 }
+
+export interface GetBookmarkedPosts {
+  bookmarkedPosts: PostData[];
+  totalBookmarkedPosts: number;
+  limit: number;
+  page: number;
+  totalPages: number;
+  serialNumberStartFrom: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: null;
+  nextPage: null;
+}
+
+export interface BookmarkedPostResponse {
+  isBookmarked: boolean;
+}
+export interface LikedPostResponse {
+  isLiked: boolean;
+}
